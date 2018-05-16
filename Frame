@@ -26,10 +26,10 @@ public class Frame extends JFrame implements ActionListener{
            
       //label  = new JLabel(icon);//O label recebe a imagem        
       txt     = "O Software funciona da seguinte maneira:\n"+
-    		  	"Exite uma area digitavel onde aceita numero e letras.\n "+
-    		    "Existem dois botões: Romano e Arábico especificamente.\n"+
-    		  	"Ao digitar um valor Romano, por exemplo, pressione o botão 'Arábico' para obter a conversão"+
-    		    "Ao digitar um valor Arábico, por exemplo, pressione o botão 'Romano' para obter a conversão";
+    		"Existe uma área digitável onde aceita números e letras.\n "+
+    		"Existem dois botões: Romano e Arábico respectivamente.\n"+
+    		"Ao digitar um valor Romano, por exemplo, pressione o botão 'Arábico' para obter a conversão"+
+    		"Ao digitar um valor Arábico, por exemplo, pressione o botão 'Romano' para obter a conversão";
       JOptionPane.showMessageDialog(null, txt);
       
       lValores = new JLabel("Valores");
