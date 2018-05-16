@@ -1,0 +1,128 @@
+package OlaMundo;
+import java.util.ArrayList;
+
+public class ConversorRomanoArabico{
+	private String[] romanos;
+	private    int[] arabics;
+	
+	public ConversorRomanoArabico()
+	{
+	      romanos = new String[] {"M",  "CM",  "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+	      arabics = new    int[] {1000,  900,  500,  400, 100,   90,  50,   40,  10,    9,   5,    4,   1};
+	}	
+	
+	//Metodos 'Private' somente para implementar o metodo toString()
+	private String algarismoRomano()
+	{
+		int i 	   =  0;
+		String txt = "";
+		
+		while(i < romanos.length)
+		{
+			txt += romanos[i]+" ";
+			i++;
+		}
+		return txt;				
+	}
+	
+	private String algarismoArabico()
+	{
+		int i 			 =  0;
+		String concatena = "";
+		
+		while(i < arabics.length)
+		{
+			concatena += arabics[i]+" ";
+			i++;
+		}		
+		return concatena;
+	}
+	
+	public String toString()
+	{		
+		return 	"Numeros Arabicos:"+algarismoArabico()+"\n"+ 
+				"Numeros Romanos:" +algarismoRomano();
+	}
+	//==================================================================
+	
+	//Este metodo faz converte numeros em algarismo romano com um limite de 3999 
+	/*
+	 * A limitação se dá por conta de matérial estudado antes de realizar este projeto.
+	 * Roma teve seu sistema numérico atualizado durante todo o Imperior Romano.
+	 * Apesar dos testes mostrarem que este metodo funciona para um numero maior que o estipulado
+	 * foi preferido manter a margem segura por conta do material estudado.
+	 * 
+	 *  Fonte resumida: http://numeros-romanos.info/
+	 */
+	public String converteArabi(int numero){		
+		int i      =  0;
+		String txt = "";
+		
+		try{		
+			if(numero == 0 || numero > 3999) 
+			{
+				System.out.println("erro: O valor não pode ser 0 ou maior que 3999, (Explico no codigo-fonte)");
+				System.exit(0);
+			}
+			else
+			{
+				while(numero > 0)
+				{
+					if(numero >= arabics[i])
+					{
+						txt    += romanos[i];
+						numero -= arabics[i];
+					}
+					else { i++; }
+				}
+			}			
+		}catch(Exception e)
+		{
+			System.exit(1);		
+		}
+		return txt;
+	}//Fim do converteRomano()
+	
+	//Este metodo converte 
+	public int converteRomano(String digitado){
+		   
+	      String arab                     =        digitado.toUpperCase();      
+	      String[] vDigito                = new String[digitado.length()];
+	      ArrayList<Integer> vArabic      = new             ArrayList<>();		
+	      int soma                        = 							0;
+	      int aux                         = 							0;
+	   	      
+	      for(int i = 0; i < vDigito.length; i++)
+	      {
+	         vDigito[i] = Character.toString(arab.charAt(i));
+	      }		
+	   	
+	      for(int j = 0; j < vDigito.length; j++)
+	      {
+	         for(int i = 0; i < romanos.length; i++)
+	         {
+	            if(vDigito[j].equals(romanos[i]))
+	            {
+	               vArabic.add(arabics[i]) ;
+	            }
+	         }
+	      } 
+	         vArabic.add(0); // este recurso "Ileal" foi usando para solucionar um problema com a verificação 
+	         				//  da posição seguinte sendo ela nula, não consegui tratar o erro e continuar 
+	         			   //   com o processo.
+	      while(aux < vArabic.size()-1)
+	      {       
+	         if(vArabic.get(aux+1) == null || vArabic.get(aux+1) == 0)
+	         {
+	            soma += vArabic.get(aux);
+	         }else if( vArabic.get(aux) < vArabic.get(aux+1) )
+	         {
+	            soma += vArabic.get(aux+1) - vArabic.get(aux);
+	            return soma;
+	         }else{soma += vArabic.get(aux);}       
+	         aux++;
+	      }
+	      
+	      return soma;
+	   } //Fim converteArabico()
+	}//Fim classe
