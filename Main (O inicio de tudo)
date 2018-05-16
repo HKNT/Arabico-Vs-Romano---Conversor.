@@ -1,0 +1,16 @@
+package OlaMundo;
+
+public class MainRomanoArabico {
+
+	public static void main(String[] args) {
+		 Frame obj = new Frame();
+		 	/*
+		 	 *As instâncias abaixo foram testes no decorrer da criação deste projeto.
+		 	 * Preferi deixa-las para efeito de analise futura, caso haja necessidade ou curiosidade.
+		 	 */
+		//ConversorRomanoArabico obj = new ConversorRomanoArabico();
+		//JOptionPane.showMessageDialog(null, obj.converteRomano(1));
+		//System.out.println(obj.converteArabico("vi"));
+		//System.out.println(obj.converteRomano(13));	
+	}
+}
