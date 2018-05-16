@@ -1,0 +1,112 @@
+package OlaMundo;
+
+import java.awt.*;
+import javax.swing.*; 
+import java.awt.event.*;
+import javax.swing.border.*;
+
+//import javax.imageio.ImageIO;
+
+public class Frame extends JFrame implements ActionListener{
+   /**
+	 * 
+	 */
+   private static final long serialVersionUID = 1L;
+   protected JLabel     lValores;
+   protected JLabel     label;            
+ //protected ImageIcon  icon; //Imagem    
+   protected JTextField tValor;     
+   protected JButton    bRomano;
+   protected JButton    bArabico;
+   
+   String txt;
+   
+   public Frame(){  
+	  getContentPane().setBackground(Color.ORANGE);  //adiciona cor ao Frame 
+           
+      //label  = new JLabel(icon);//O label recebe a imagem        
+      txt     = "O Software funciona da seguinte maneira:\n"+
+    		  	"Exite uma area digitavel onde aceita numero e letras.\n "+
+    		    "Existem dois botões: Romano e Arábico especificamente.\n"+
+    		  	"Ao digitar um valor Romano, por exemplo, pressione o botão 'Arábico' para obter a conversão"+
+    		    "Ao digitar um valor Arábico, por exemplo, pressione o botão 'Romano' para obter a conversão";
+      JOptionPane.showMessageDialog(null, txt);
+      
+      lValores = new JLabel("Valores");
+      
+      tValor   = new JTextField(7);
+      
+      bArabico = new JButton("Romano");
+      bRomano  = new JButton("Arábico");
+      
+      
+      setTitle("Algarismo Romano x Arábico");
+      
+      bArabico.addActionListener(this);
+      bRomano .addActionListener(this);  
+      
+   	  
+            //GridBag  
+      setLayout(new GridBagLayout());// define o layout      
+      ((JComponent)getContentPane()).setBorder(new EmptyBorder(1, 1, 1, 1));
+      //define uma borda para aumentar o espaÃ§co entre as bordas da janela e o gerenciador de layout//
+    
+      GridBagConstraints cons = new GridBagConstraints();
+      // cria o GridBagConstraints
+     
+      cons.insets = new Insets(1, 1, 4, 4);//Controla a distancia entre os botÃµoes, cima baixo, esquerda e direita.
+      cons.anchor = GridBagConstraints. WEST;//alinhamento dos componeste, esta alinhado a oeste (lado esquerdo)
+           
+      cons.gridy  = 0; // linha
+      cons.gridx  = 0; // coluna
+      cons.anchor = GridBagConstraints. CENTER;
+      add(lValores,cons);
+      
+      cons.gridy = 0; // linha
+      cons.gridx = 1; // coluna,
+      add(tValor,cons);
+    
+      cons.gridy      = 1; // linha
+      cons.gridx      = 0; // coluna
+      add(bArabico,cons);
+      
+      cons.gridy = 1; // linha
+      cons.gridx = 1; // coluna
+      add(bRomano,cons);     
+
+       // altera o icone padrÃ£o do java
+      //setIconImage(new ImageIcon("imagens/imagem.png").getImage());
+      setSize(210,220); //Largura, altura
+      setResizable(false);
+      setLocationRelativeTo(null);
+      setVisible(true);
+      setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+      
+   }//fim construtor  
+   
+   public void actionPerformed(ActionEvent event)
+   {
+      try
+      {
+         ConversorRomanoArabico obj = new ConversorRomanoArabico();
+         if(event.getSource() == bArabico)
+         {    
+            String aux = obj.converteArabi(Integer.parseInt(tValor.getText() ));                
+            tValor.setText(aux);
+         }
+      
+         if(event.getSource() == bRomano)
+         {
+            int aux    = obj.converteRomano(tValor.getText());
+            String txt = aux+"";
+            tValor.setText(txt);
+         }
+      }catch(Exception e)
+      {
+         JOptionPane.showMessageDialog(null,"É possivel que você pressionou o botão para a tarefa de conversão errada!");         
+         //Não consegui pensar numa solução para tratar um erro no bRomano
+        // já que ele tem um parametro de String, apesar de returnar inteiro.
+      }
+      
+   }//Fim actionPerformed()
+}//Fim Classe
